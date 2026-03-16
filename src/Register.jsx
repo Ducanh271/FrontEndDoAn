@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import Webcam from 'react-webcam';
-import axios from 'axios';
+import axiosClient from './api/axiosClient';
 
 export default function Register() {
   const webcamRef = useRef(null);
@@ -63,8 +63,7 @@ export default function Register() {
         images: images,
       };
 
-      const response = await axios.post('http://localhost:8080/api/employees/register', payload);
-
+      const response = await axiosClient.post('/admin/register', payload);
       setResult({ type: 'success', data: response.data });
       setImages([]); // Thành công thì xóa ảnh cũ đi
 
